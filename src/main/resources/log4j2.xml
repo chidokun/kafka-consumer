@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="10">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%style{%d{yyyy-MM-dd HH:mm:ss}}{white} %highlight{%-5level} [%style{%t}{bright,blue}] %style{%C{1.}.%M():%L}{bright,cyan} %msg%n"/>
+        </Console>
+        <RollingFile name="RollingLogFile" fileName="log/system.log"
+                     filePattern="log/$${date:yyyy-MM}/system-%d{yy-MM-dd}-%i.log.log"
+                     ignoreExceptions="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %p %C{1.}.%M():%L - %msg%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="80MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="9000"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingLogFile"/>
+        </Root>
+        <Logger name="um.admin" level="TRACE"/>
+    </Loggers>
+</Configuration>

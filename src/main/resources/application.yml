@@ -1,0 +1,23 @@
+server:
+  port: 9205
+
+spring:
+  kafka:
+    producer:
+      bootstrap-servers:
+        - 10.50.1.6:9092
+        - 10.50.1.7:9092
+        - 10.50.1.8:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers:
+        - 10.50.1.6:9092
+        - 10.50.1.7:9092
+        - 10.50.1.8:9092
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: ChidokunKafkaConsumer
+    listener:
+      concurrency: 2
