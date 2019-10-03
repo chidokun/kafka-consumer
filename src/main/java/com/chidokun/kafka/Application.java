@@ -1,5 +1,6 @@
 package com.chidokun.kafka;
 
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
@@ -16,8 +17,8 @@ public class Application {
     }
 
     @KafkaListener(topics = "UMChangePhone")
-    public void consumeTopic(String message) {
-        logger.info("Kafka Consumer: UMChangePhone: {}", message);
+    public void consumeTopic(ConsumerRecord<?, ?> record) {
+        logger.info("Kafka Consumer: {}: {}", record.topic(), record.value());
     }
 
 }
